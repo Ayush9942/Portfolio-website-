@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Ayush Ranjan</title>
+  <style>
+    /* ---------- RESET & GLOBAL ---------- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: radial-gradient(circle at 30% 20%, #221c30 0%, #151020 45%, #0a0812 100%);
+      background-attachment: fixed;
+      font-family: 'Poppins', system-ui, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      padding: 1.5rem 1.5rem 4rem;
+      color: #d9d1ec;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.28;
+      pointer-events: none;
+      z-index: 0;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, #7a5fb0, transparent 70%);
+      top: 10%; left: -8%;
+      animation: drift 22s ease-in-out infinite;
+      will-change: transform;
+    }
+    @keyframes drift {
+      0%, 100% { transform: translate(0, 0); }
+      50%      { transform: translate(60px, -40px); }
+    }
+
+    /* ---------- TOP NAV ---------- */
+    .top-nav {
+      max-width: 1100px; margin: 0 auto 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 1.5rem;
+      background: rgba(30, 24, 45, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(180, 155, 224, 0.15);
+      border-radius: 50px;
+      box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.7);
+      position: sticky; top: 1rem; z-index: 100;
+      opacity: 0; transform: translateY(-30px);
+      animation: navSlideDown 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s forwards;
+    }
+    @keyframes navSlideDown { to { opacity: 1; transform: translateY(0); } }
+
+    .nav-logo { font-weight: 700; font-size: 1.05rem; color: #f0eaff; letter-spacing: 0.3px; }
+    .nav-logo span { color: #b49be0; animation: blink 1.6s ease-in-out infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    .nav-links { display: flex; gap: 0.4rem; list-style: none; }
+    .nav-links a {
+      color: #b3a6d1; text-decoration: none; font-size: 0.9rem; font-weight: 500;
+      padding: 0.45rem 0.95rem; border-radius: 30px;
+      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+      position: relative;
+    }
+    .nav-links a:hover { background: rgba(180, 155, 224, 0.15); color: #fff; transform: translateY(-2px); }
+
+    /* ---------- CONTAINER ---------- */
+    .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+
+    /* ---------- CARD BASE ---------- */
+    .hero, .content-section, .connect-section {
+      background: rgba(35, 28, 50, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(180, 155, 224, 0.14);
+      border-radius: 2.5rem;
+      box-shadow: 0 30px 55px -20px rgba(0, 0, 0, 0.8),
+                  0 0 60px -20px rgba(120, 80, 200, 0.15) inset;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before, .content-section::before, .connect-section::before {
+      content: ""; position: absolute; top: 0; left: -150%;
+      width: 80%; height: 100%;
+      background: linear-gradient(115deg, transparent, rgba(180, 155, 224, 0.06), transparent);
+      transform: skewX(-20deg);
+      animation: sheen 12s ease-in-out infinite; pointer-events: none;
+      will-change: left;
+    }
+    @keyframes sheen {
+      0%   { left: -150%; }
+      60%  { left: 150%; }
+      100% { left: 150%; }
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      padding: 3.5rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 3rem; min-height: 380px;
+    }
+    .hero-text { flex: 1; min-width: 0; }
+
+    h1 {
+      font-size: 3.4rem; font-weight: 800; letter-spacing: -1.5px; line-height: 1.05;
+      margin-bottom: 0.9rem;
+      background: linear-gradient(90deg, #f5f0ff, #cbb8f0, #f5f0ff);
+      background-size: 200% auto;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0; transform: translateX(-40px);
+      animation: slideInLeft 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+    }
+    @keyframes slideInLeft { to { opacity: 1; transform: translateX(0); } }
+
+    .badge {
+      display: inline-block;
+      background: rgba(180, 155, 224, 0.12);
+      color: #cbb8f0; font-size: 0.9rem; font-weight: 600;
+      padding: 0.4rem 1.2rem; border-radius: 40px; letter-spacing: 0.3px;
+      border: 1px solid rgba(180, 155, 224, 0.25);
+      margin-bottom: 1.4rem;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp 0.7s ease 0.55s forwards;
+    }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    .intro-text {
+      font-size: 1.1rem; line-height: 1.6; color: #b3a6d1; font-weight: 400;
+      max-width: 500px;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.75s forwards;
+    }
+    .intro-text strong {
+      color: #e0d4ff; font-weight: 600;
+      background: rgba(180, 155, 224, 0.15);
+      padding: 0.1rem 0.4rem; border-radius: 8px;
+      display: inline-block;
+      transition: background 0.3s ease;
+    }
+    .intro-text strong:hover { background: rgba(180, 155, 224, 0.35); }
+
+    /* ---------- PHOTO ---------- */
+    .avatar-circle {
+      flex-shrink: 0; overflow: hidden;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 260px; height: 260px;
+      background: linear-gradient(135deg, #3b2c5c, #5e4a8a);
+      border-radius: 50%;
+      box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.9),
+                  0 0 0 6px rgba(180, 155, 224, 0.18);
+      opacity: 0; transform: scale(0.6);
+      animation: photoPop 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards,
+                 photoFloat 6s ease-in-out 1.5s infinite;
+      position: relative;
+      will-change: transform;
+    }
+    @keyframes photoPop { to { opacity: 1; transform: scale(1); } }
+    @keyframes photoFloat {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
+    }
+    .avatar-circle:hover {
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.95),
+                  0 0 0 6px rgba(180, 155, 224, 0.4);
+    }
+    .avatar-circle img {
+      width: 100%; height: 100%; object-fit: cover;
+      border-radius: 50%; display: block;
+    }
+
+    /* ---------- SECTION BASE ---------- */
+    .content-section { padding: 3rem 3rem; }
+
+    .section-title {
+      font-size: 1.6rem; font-weight: 700; color: #f0eaff;
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 12px;
+      opacity: 0; transform: translateX(-30px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .section-title.visible { opacity: 1; transform: translateX(0); }
+    .section-title::before {
+      content: ""; display: block; width: 5px; height: 28px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #b49be0, #5e4a8a);
+      box-shadow: 0 0 15px rgba(180, 155, 224, 0.5);
+    }
+
+    /* ---------- REVEAL ---------- */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition-delay: var(--delay, 0s);
+      will-change: opacity, transform;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ---------- ABOUT ---------- */
+    .about-intro {
+      font-size: 1rem; line-height: 1.85; color: #b3a6d1; margin-bottom: 1.5rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 1rem; margin: 1.8rem 0;
+    }
+
+    .about-card {
+      position: relative;
+      background: rgba(45, 36, 65, 0.55);
+      border: 1px solid rgba(180, 155, 224, 0.18);
+      border-radius: 18px;
+      padding: 1.4rem 1rem 1.2rem;
+      text-align: center;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  border-color 0.3s ease, box-shadow 0.4s ease;
+    }
+    .about-card::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(120deg, transparent 40%, rgba(180, 155, 224, 0.15) 50%, transparent 60%);
+      transform: translateX(-120%);
+      transition: transform 0.9s ease; pointer-events: none;
+    }
+    .about-card:hover::before { transform: translateX(120%); }
+    .about-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      border-color: rgba(180, 155, 224, 0.55);
+      box-shadow: 0 20px 40px -15px rgba(120, 80, 200, 0.65);
+    }
+
+    .about-icon {
+      width: 76px; height: 76px;
+      margin: 0 auto 0.7rem;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(180, 155, 224, 0.18), rgba(120, 80, 200, 0.08));
+      border: 1px solid rgba(180, 155, 224, 0.2);
+      position: relative;
+      animation: floaty 3.2s ease-in-out infinite;
+      will-change: transform;
+    }
+    .about-card:nth-child(1) .about-icon { animation-delay: 0s; }
+    .about-card:nth-child(2) .about-icon { animation-delay: 0.4s; }
+    .about-card:nth-child(3) .about-icon { animation-delay: 0.8s; }
+    .about-card:nth-child(4) .about-icon { animation-delay: 1.2s; }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
+    }
+
+    .about-icon svg {
+      width: 48px; height: 48px;
+      overflow: visible;
+    }
+
+    /* STUDENT */
+    .student-cap { transform-origin: 50% 70%; animation: capTilt 3.4s ease-in-out infinite; }
+    .student-tassel { transform-origin: 80% 5%; animation: tasselSwing 3.4s ease-in-out infinite; }
+    @keyframes capTilt {
+      0%, 100% { transform: rotate(-6deg); }
+      50%      { transform: rotate(6deg); }
+    }
+    @keyframes tasselSwing {
+      0%, 100% { transform: rotate(-25deg); }
+      50%      { transform: rotate(25deg); }
+    }
+
+    /* BOOKS */
+    .book-left { transform-origin: 100% 50%; animation: bookLeft 3.6s ease-in-out infinite; }
+    .book-right { transform-origin: 0% 50%; animation: bookRight 3.6s ease-in-out infinite; }
+    @keyframes bookLeft {
+      0%, 40%, 60%, 100% { transform: rotateY(0deg); }
+      50%                { transform: rotateY(-35deg); }
+    }
+    @keyframes bookRight {
+      0%, 40%, 60%, 100% { transform: rotateY(0deg); }
+      50%                { transform: rotateY(35deg); }
+    }
+    .book-page { animation: pageGlow 3.6s ease-in-out infinite; }
+    @keyframes pageGlow {
+      0%, 40%, 60%, 100% { opacity: 0.35; }
+      50%                { opacity: 1; }
+    }
+
+    /* COMPUTER */
+    .code-line {
+      stroke-dasharray: 30;
+      stroke-dashoffset: 30;
+      animation: typing 4s ease-in-out infinite;
+    }
+    .code-line:nth-child(2) { animation-delay: 0.15s; }
+    .code-line:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes typing {
+      0%, 15%   { stroke-dashoffset: 30; opacity: 0.3; }
+      40%, 70%  { stroke-dashoffset: 0;  opacity: 1; }
+      85%, 100% { stroke-dashoffset: 30; opacity: 0.3; }
+    }
+    .hand-left  { transform-origin: 65% 80%; animation: typeLeft 0.55s ease-in-out infinite alternate; }
+    .hand-right { transform-origin: 35% 80%; animation: typeRight 0.55s ease-in-out infinite alternate; }
+    @keyframes typeLeft {
+      0%   { transform: translate(0, 0); }
+      100% { transform: translate(-2px, -3px); }
+    }
+    @keyframes typeRight {
+      0%   { transform: translate(0, 0); }
+      100% { transform: translate(2px, -3px); }
+    }
+
+    /* ROCKET */
+    .rocket-flame {
+      transform-origin: 50% 0%;
+      animation: flameFlicker 0.4s ease-in-out infinite alternate;
+    }
+    @keyframes flameFlicker {
+      0%   { transform: scaleY(0.9); opacity: 0.8; }
+      100% { transform: scaleY(1.15); opacity: 1; }
+    }
+    .rocket-body {
+      transform-origin: 50% 50%;
+      animation: rocketFly 4s ease-in-out infinite;
+    }
+    @keyframes rocketFly {
+      0%   { transform: translate(0, 0) rotate(0deg); }
+      25%  { transform: translate(0, -8px) rotate(-3deg); }
+      50%  { transform: translate(6px, -22px) rotate(5deg); }
+      75%  { transform: translate(-4px, -34px) rotate(-4deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+    .launch-pad {
+      transform-origin: 50% 100%;
+      animation: padPulse 4s ease-in-out infinite;
+    }
+    @keyframes padPulse {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50%      { transform: scale(1.06); opacity: 1; }
+    }
+    .rocket-trail {
+      transform-origin: 50% 50%;
+      animation: trailBlink 4s ease-in-out infinite;
+    }
+    @keyframes trailBlink {
+      0%, 100% { opacity: 0; transform: scale(0.4); }
+      30%      { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    .about-card h4 {
+      font-size: 0.95rem; color: #e0d4ff;
+      margin-bottom: 0.35rem; letter-spacing: 0.4px; font-weight: 600;
+    }
+    .about-card p { font-size: 0.83rem; color: #a094c4; line-height: 1.45; }
+
+    /* ---------- QUOTE ROTATOR ---------- */
+    .quote-rotator {
+      position: relative;
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 1.3rem 1.5rem; margin: 1.8rem 0;
+      background: rgba(30, 24, 45, 0.5);
+      border-left: 4px solid transparent;
+      border-image: linear-gradient(180deg, #b49be0, #5e4a8a) 1;
+      border-radius: 14px; min-height: 72px;
+      overflow: hidden;
+    }
+    .quote-icon {
+      font-family: Georgia, serif; font-size: 3rem; line-height: 1;
+      color: rgba(180, 155, 224, 0.45); flex-shrink: 0; margin-top: -6px;
+      animation: quoteBounce 3s ease-in-out infinite;
+    }
+    @keyframes quoteBounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-3px) scale(1.04); }
+    }
+    .quote-text {
+      position: relative; flex: 1; min-height: 2.4rem;
+      color: #d9d1ec; font-size: 1rem; line-height: 1.55; font-style: italic;
+    }
+    .quote {
+      position: absolute; inset: 0; opacity: 0; transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease; pointer-events: none;
+    }
+    .quote.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+    /* ---------- STATUS PILL ---------- */
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(80, 200, 120, 0.1);
+      border: 1px solid rgba(80, 200, 120, 0.35);
+      color: #a8e6b8;
+      padding: 0.55rem 1.15rem; border-radius: 30px;
+      font-size: 0.88rem; font-weight: 500; margin-top: 0.5rem;
+    }
+    .status-pill .dot {
+      width: 9px; height: 9px; background: #50c878; border-radius: 50%;
+      animation: pulse 2s infinite; flex-shrink: 0;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.4; }
+    }
+
+    /* ---------- TECH STACK ---------- */
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+    .tech-tag {
+      background: rgba(45, 36, 65, 0.7);
+      border-radius: 40px; padding: 0.6rem 1.3rem;
+      font-size: 0.9rem; font-weight: 500; color: #d9d1ec;
+      border: 1px solid rgba(180, 155, 224, 0.2);
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      display: flex; align-items: center; gap: 8px;
+      opacity: 0; transform: translateY(20px) scale(0.9);
+    }
+    .tech-tag.visible {
+      animation: tagPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      animation-delay: var(--tagDelay, 0s);
+    }
+    @keyframes tagPop { to { opacity: 1; transform: translateY(0) scale(1); } }
+    .tech-tag:hover {
+      background: rgba(60, 48, 85, 0.9);
+      border-color: rgba(180, 155, 224, 0.6);
+      transform: translateY(-3px) scale(1.05);
+    }
+    .tech-icon {
+      width: 18px; height: 18px; display: inline-block;
+      vertical-align: middle;
+    }
+
+    /* ============================================
+       PROJECTS — CAROUSEL (auto + manual scroll)
+       ============================================ */
+    .projects-section { padding: 3rem 0 3rem; }
+    .projects-section .section-title {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+
+    .placeholder-note {
+      font-weight: 500;
+      font-size: 1rem;
+      color: #a094c4;
+      line-height: 1.8;
+      padding: 1.1rem 1.4rem;
+      border: 1.5px dashed rgba(180, 155, 224, 0.3);
+      border-radius: 20px;
+      background: rgba(30, 24, 45, 0.5);
+      margin: 0 3rem 2rem;
+    }
+    .placeholder-note strong {
+      color: #e0d4ff; font-weight: 600;
+      background: rgba(180, 155, 224, 0.15);
+      padding: 0.1rem 0.4rem; border-radius: 8px;
+    }
+
+    /* ============================================
+   PROJECTS — SEAMLESS AUTO CAROUSEL
+   ============================================ */
+
+.projects-section {
+  padding: 3rem 0 3rem;
+}
+
+.projects-section .section-title {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.placeholder-note {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #a094c4;
+  line-height: 1.8;
+  padding: 1.1rem 1.4rem;
+  border: 1.5px dashed rgba(180, 155, 224, 0.3);
+  border-radius: 20px;
+  background: rgba(30, 24, 45, 0.5);
+  margin: 0 3rem 2rem;
+}
+
+.placeholder-note strong {
+  color: #e0d4ff;
+  font-weight: 600;
+  background: rgba(180, 155, 224, 0.15);
+  padding: 0.1rem 0.4rem;
+  border-radius: 8px;
+}
+
+/* Outer mask */
+.carousel-wrapper {
+  position: relative;
+  padding: 0.5rem 0 1rem;
+  overflow: hidden;
+
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+}
+
+/* Actual scrolling area */
+.carousel-track {
+  display: flex;
+  gap: 1.4rem;
+  width: max-content;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  cursor: grab;
+  padding: 0.3rem 3rem 0.8rem;
+
+  /* Important */
+  scroll-behavior: auto;
+  overscroll-behavior-x: contain;
+  touch-action: pan-y;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-track.dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+/* Project card */
+.project-card {
+  flex: 0 0 300px;
+
+  background: rgba(45, 36, 65, 0.6);
+  border: 1px solid rgba(180, 155, 224, 0.18);
+  border-radius: 20px;
+
+  overflow: hidden;
+  position: relative;
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  border-color: rgba(180, 155, 224, 0.55);
+  box-shadow:
+    0 20px 40px -15px rgba(120, 80, 200, 0.6);
+}
+
+
+
+    /* image area */
+    .project-image {
+      width: 100%;
+      height: 160px;
+      background:
+        linear-gradient(135deg, rgba(120, 80, 200, 0.25), rgba(60, 40, 100, 0.4)),
+        repeating-linear-gradient(45deg,
+          rgba(180, 155, 224, 0.06) 0 12px,
+          transparent 12px 24px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(200, 180, 240, 0.7);
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(180, 155, 224, 0.15);
+    }
+
+    .project-image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 2;
+    }
+
+    .project-image-icon {
+      font-size: 2.2rem;
+      color: rgba(200, 180, 240, 0.55);
+      position: relative;
+      z-index: 1;
+    }
+
+    .live-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      background: rgba(80, 200, 120, 0.2);
+      color: #a8e6b8;
+      border: 1px solid rgba(80, 200, 120, 0.55);
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      z-index: 4;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .live-badge::before {
+      content: "";
+      width: 6px; height: 6px;
+      background: #50c878;
+      border-radius: 50%;
+    }
+
+    .coming-soon-tag {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: rgba(255, 200, 100, 0.15);
+      color: #ffd88a;
+      border: 1px solid rgba(255, 200, 100, 0.4);
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      z-index: 4;
+    }
+
+    .project-body {
+      padding: 1.1rem 1.2rem 1.3rem;
+    }
+    .project-body h3 {
+      font-size: 1.05rem;
+      color: #f0eaff;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+    .project-body p {
+      font-size: 0.82rem;
+      color: #a094c4;
+      line-height: 1.5;
+      margin-bottom: 0.9rem;
+      min-height: 3.4rem;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.6rem;
+    }
+    .project-tags span {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      background: rgba(180, 155, 224, 0.12);
+      color: #cbb8f0;
+      border: 1px solid rgba(180, 155, 224, 0.25);
+      font-weight: 500;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(180, 155, 224, 0.2);
+    }
+    .project-links a {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 0.5rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #d9d1ec;
+      background: rgba(180, 155, 224, 0.1);
+      border: 1px solid rgba(180, 155, 224, 0.2);
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    }
+    .project-links a:hover {
+      background: rgba(180, 155, 224, 0.25);
+      color: #ffffff;
+      transform: translateY(-2px);
+      border-color: rgba(180, 155, 224, 0.55);
+    }
+    .project-links a i { font-size: 0.8rem; }
+
+    /* ---------- CONNECT ---------- */
+    .connect-section { padding: 2.8rem 3rem; }
+    .connect-heading {
+      font-size: 1.3rem; text-align: center; letter-spacing: 2px;
+      font-weight: 700; margin-bottom: 1.6rem;
+      background: linear-gradient(90deg, #e0d4ff, #b49be0, #e0d4ff);
+      background-size: 200% auto;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmerText 4s linear infinite;
+    }
+    @keyframes shimmerText {
+      0%   { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+    .connect-buttons {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; padding: 0.85rem 2rem; border-radius: 50px;
+      font-weight: 600; font-size: 1rem; text-decoration: none;
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+      border: 1px solid transparent; cursor: pointer;
+      box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.6);
+      position: relative;
+      opacity: 0; transform: translateY(20px);
+    }
+    .btn.visible {
+      animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      animation-delay: var(--btnDelay, 0s);
+    }
+    .btn i { font-size: 1.05rem; }
+
+    .btn-github { background: #1a1526; color: #f0eaff; border-color: rgba(180, 155, 224, 0.3); }
+    .btn-github:hover {
+      background: #2a233b; transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 16px 30px -10px rgba(120, 80, 200, 0.7);
+      border-color: rgba(180, 155, 224, 0.6);
+    }
+    .btn-telegram {
+      background: linear-gradient(135deg, #2d7fc1, #1e5f9e);
+      color: white; border-color: rgba(79, 154, 217, 0.5);
+    }
+    .btn-telegram:hover {
+      background: linear-gradient(135deg, #3b8fd4, #246eb3);
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 16px 30px -10px rgba(45, 127, 193, 0.8);
+      border-color: #8bc2f0;
+    }
+    .btn-email {
+      background: linear-gradient(135deg, #EA4335, #c5221f);
+      color: white; border-color: rgba(242, 139, 130, 0.5);
+    }
+    .btn-email:hover {
+      background: linear-gradient(135deg, #f0524a, #EA4335);
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 16px 30px -10px rgba(234, 67, 53, 0.8);
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer-note {
+      text-align: center; margin-top: 1.8rem; font-size: 0.85rem;
+      color: #8a7ca8;
+      border-top: 1px dashed rgba(180, 155, 224, 0.2);
+      padding-top: 1.5rem; letter-spacing: 0.3px;
+    }
+    .footer-note span {
+      background: rgba(180, 155, 224, 0.12);
+      padding: 0.25rem 0.7rem; border-radius: 16px;
+      font-weight: 500; color: #cbb8f0;
+      border: 1px solid rgba(180, 155, 224, 0.2);
+      display: inline-block;
+    }
+
+    .copyright {
+      text-align: center; margin-top: 2rem; font-size: 0.85rem;
+      color: #7a6d99; letter-spacing: 0.3px;
+    }
+
+    .highlight {
+      color: #e0d4ff; font-weight: 600;
+      background: rgba(180, 155, 224, 0.15);
+      padding: 0.1rem 0.4rem; border-radius: 8px;
+      display: inline-block;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 850px) {
+      .hero {
+        flex-direction: column-reverse; text-align: center;
+        padding: 2.5rem 2rem; gap: 2rem;
+      }
+      .intro-text { margin: 0 auto; }
+      .avatar-circle { width: 200px; height: 200px; }
+      h1 { font-size: 2.6rem; }
+      .top-nav {
+        flex-direction: column; gap: 0.8rem;
+        border-radius: 24px; padding: 1rem; position: static;
+      }
+      .nav-links { flex-wrap: wrap; justify-content: center; }
+      .content-section, .connect-section { padding: 2rem 1.5rem; }
+      .projects-section .section-title { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .placeholder-note { margin: 0 1.5rem 1.5rem; }
+    }
+
+    @media (max-width: 500px) {
+      body { padding: 1rem 0.8rem 3rem; }
+      .hero { padding: 2rem 1.3rem; border-radius: 2rem; }
+      .content-section, .connect-section { padding: 1.8rem 1.3rem; border-radius: 2rem; }
+      h1 { font-size: 2rem; letter-spacing: -1px; }
+      .avatar-circle { width: 160px; height: 160px; }
+      .intro-text { font-size: 0.95rem; }
+      .btn { padding: 0.75rem 1.3rem; font-size: 0.9rem; flex: 1 1 100%; }
+      .project-card { width: 260px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      .reveal, .btn, .tech-tag { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= TOP NAV ================= -->
+  <nav class="top-nav">
+    <div class="nav-logo">Ayush<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#connect">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="home">
+      <div class="hero-text">
+        <h1>Ayush Ranjan</h1>
+        <div class="badge">beginner web dev</div>
+        <p class="intro-text">
+          Hi! I'm Ayush, a passionate <strong>beginner</strong> exploring the web.<br>
+          Learning <strong>HTML</strong>, <strong>CSS</strong>, <strong>JavaScript</strong>,
+          <strong>TypeScript</strong> &amp; <strong>Python</strong>.
+        </p>
+      </div>
+
+      <div class="avatar-circle">
+        <img src="Images/Ayush.jpg" alt="Ayush Ranjan">
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="content-section" id="about">
+      <h2 class="section-title">About Me</h2>
+
+      <p class="about-intro reveal">
+        Hey! I'm Ayush, a Class 12th student from
+        <span class="highlight">Bihar, India</span>, currently preparing for JEE
+        while exploring the world of technology and building things of my own.
+      </p>
+
+      <div class="about-grid">
+
+        <!-- STUDENT -->
+        <div class="about-card reveal" style="--delay: 0.05s">
+          <div class="about-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="#cbb8f0" stroke-width="2.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <g class="student-cap">
+                <path d="M8 22 L32 10 L56 22 L32 34 Z" fill="rgba(180,155,224,0.15)"/>
+                <path d="M8 22 L32 10 L56 22 L32 34 Z"/>
+                <g class="student-tassel">
+                  <line x1="56" y1="22" x2="56" y2="38"/>
+                  <circle cx="56" cy="42" r="3" fill="rgba(255,215,120,0.6)"
+                          stroke="#ffd878" stroke-width="2"/>
+                </g>
+                <path d="M22 30 L22 42 Q32 50 42 42 L42 30"
+                      stroke="rgba(180,155,224,0.5)" stroke-width="2"/>
+              </g>
+            </svg>
+          </div>
+          <h4>Student</h4>
+          <p>Class 12 · Bihar, India</p>
+        </div>
+
+        <!-- BOOKS -->
+        <div class="about-card reveal" style="--delay: 0.15s">
+          <div class="about-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="#cbb8f0" stroke-width="2.5"
+                 stroke-linecap="round" stroke-linejoin="round"
+                 style="perspective: 200px;">
+              <g class="book-left">
+                <path d="M32 18 L10 22 L10 48 L32 44 Z" fill="rgba(180,155,224,0.18)"/>
+                <path d="M32 18 L10 22 L10 48 L32 44 Z"/>
+                <line x1="16" y1="28" x2="26" y2="27" stroke-width="1.8"/>
+                <line x1="16" y1="34" x2="26" y2="33" stroke-width="1.8"/>
+                <line x1="16" y1="40" x2="26" y2="39" stroke-width="1.8"/>
+              </g>
+              <g class="book-right">
+                <path d="M32 18 L54 22 L54 48 L32 44 Z" fill="rgba(180,155,224,0.18)"/>
+                <path d="M32 18 L54 22 L54 48 L32 44 Z"/>
+                <line x1="38" y1="27" x2="48" y2="28" stroke-width="1.8"/>
+                <line x1="38" y1="33" x2="48" y2="34" stroke-width="1.8"/>
+                <line x1="38" y1="39" x2="48" y2="40" stroke-width="1.8"/>
+              </g>
+              <line x1="32" y1="18" x2="32" y2="44"
+                    stroke="rgba(200,180,240,0.9)" stroke-width="1.5"
+                    class="book-page"/>
+            </svg>
+          </div>
+          <h4>Currently</h4>
+          <p>JEE preparation + coding</p>
+        </div>
+
+        <!-- COMPUTER -->
+        <div class="about-card reveal" style="--delay: 0.25s">
+          <div class="about-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="#cbb8f0" stroke-width="2.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <rect x="10" y="12" width="44" height="30" rx="3"
+                    fill="rgba(180,155,224,0.1)"/>
+              <rect x="10" y="12" width="44" height="30" rx="3"/>
+              <line x1="16" y1="22" x2="30" y2="22" class="code-line"/>
+              <line x1="16" y1="28" x2="42" y2="28" class="code-line"/>
+              <line x1="16" y1="34" x2="36" y2="34" class="code-line"/>
+              <line x1="32" y1="42" x2="32" y2="48"/>
+              <line x1="22" y1="48" x2="42" y2="48"/>
+              <rect x="14" y="50" width="36" height="6" rx="1.5"
+                    fill="rgba(180,155,224,0.12)"/>
+              <g class="hand-left" stroke="#ffd878" stroke-width="2.2">
+                <circle cx="24" cy="53" r="2.5" fill="rgba(255,215,120,0.3)"/>
+                <line x1="24" y1="53" x2="22" y2="56"/>
+              </g>
+              <g class="hand-right" stroke="#ffd878" stroke-width="2.2">
+                <circle cx="40" cy="53" r="2.5" fill="rgba(255,215,120,0.3)"/>
+                <line x1="40" y1="53" x2="42" y2="56"/>
+              </g>
+            </svg>
+          </div>
+          <h4>Building</h4>
+          <p>Web dev · Python · AI</p>
+        </div>
+
+        <!-- ROCKET -->
+        <div class="about-card reveal" style="--delay: 0.35s">
+          <div class="about-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="#cbb8f0" stroke-width="2.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <g class="launch-pad">
+                <ellipse cx="32" cy="56" rx="14" ry="3"
+                         fill="rgba(180,155,224,0.18)" stroke="none"/>
+                <line x1="20" y1="56" x2="44" y2="56"/>
+              </g>
+              <circle cx="26" cy="46" r="1.6" fill="#ffd878" class="rocket-trail" stroke="none"/>
+              <circle cx="38" cy="50" r="1.4" fill="#ffb060" class="rocket-trail"
+                      stroke="none" style="animation-delay: 0.4s"/>
+              <circle cx="30" cy="52" r="1.2" fill="#ffd878" class="rocket-trail"
+                      stroke="none" style="animation-delay: 0.8s"/>
+
+              <g class="rocket-body">
+                <path d="M32 8 Q40 22 40 36 L24 36 Q24 22 32 8 Z"
+                      fill="rgba(180,155,224,0.22)"/>
+                <path d="M32 8 Q40 22 40 36 L24 36 Q24 22 32 8 Z"/>
+                <circle cx="32" cy="24" r="3.2"
+                        fill="rgba(120,80,200,0.5)" stroke="#cbb8f0" stroke-width="1.8"/>
+                <path d="M24 32 L18 42 L24 38 Z" fill="rgba(180,155,224,0.3)"/>
+                <path d="M40 32 L46 42 L40 38 Z" fill="rgba(180,155,224,0.3)"/>
+                <path d="M28 38 Q32 48 36 38 Q32 42 28 38 Z"
+                      fill="#ffb060" stroke="#ffd878" stroke-width="1.5"
+                      class="rocket-flame"/>
+              </g>
+            </svg>
+          </div>
+          <h4>Goal</h4>
+          <p>Software developer</p>
+        </div>
+
+      </div>
+
+      <p class="about-intro reveal" style="--delay: 0.1s">
+        I enjoy learning by actually creating — from
+        <span class="highlight">web development to Python</span>,
+        AI, APIs, and cloud technologies. I'm always experimenting with new tools,
+        breaking things, fixing them, and trying to understand how everything works
+        under the hood.
+      </p>
+
+      <div class="quote-rotator reveal" style="--delay: 0.2s">
+        <div class="quote-icon">"</div>
+        <div class="quote-text">
+          <span class="quote active">The best way to learn is to build.</span>
+          <span class="quote">Break it. Fix it. Understand it.</span>
+          <span class="quote">Small steps every day beat big leaps someday.</span>
+        </div>
+      </div>
+
+      <p class="about-intro reveal" style="--delay: 0.15s">
+        Alongside my studies, I'm working on personal projects that turn my ideas
+        into real, usable products. I'm especially interested in
+        <span class="highlight">software development, AI</span>, and building
+        useful applications.
+      </p>
+
+      <div class="status-pill reveal" style="--delay: 0.3s">
+        <span class="dot"></span>
+        Learning every day
+      </div>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section class="content-section">
+      <h2 class="section-title">Skills I'm Learning</h2>
+      <div class="tech-stack">
+        <span class="tech-tag" style="--tagDelay: 0.05s">
+          <img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML5" class="tech-icon"> HTML
+        </span>
+        <span class="tech-tag" style="--tagDelay: 0.15s">
+          <img src="https://cdn.simpleicons.org/css/1572B6" alt="CSS" class="tech-icon"> CSS
+        </span>
+        <span class="tech-tag" style="--tagDelay: 0.25s">
+          <img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript" class="tech-icon"> JavaScript
+        </span>
+        <span class="tech-tag" style="--tagDelay: 0.35s">
+          <img src="https://cdn.simpleicons.org/typescript/3178C6" alt="TypeScript" class="tech-icon"> TypeScript
+        </span>
+        <span class="tech-tag" style="--tagDelay: 0.45s">
+          <img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" class="tech-icon"> Python
+        </span>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section class="content-section projects-section" id="projects">
+      <h2 class="section-title">My Projects</h2>
+
+      <p class="placeholder-note reveal">
+        Open-source things I've built while learning. Feel free to explore, fork, or break them 🚀
+      </p>
+
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+
+          <!-- ===== SET 1 ===== -->
+
+          <!-- QR Code Generator -->
+          <article class="project-card">
+            <div class="project-image">
+              <img src="Images/project_qr.jpg" alt="QR Code Generator"
+                   onerror="this.style.display='none';">
+              <i class="fas fa-qrcode project-image-icon"></i>
+              <span class="live-badge">Live</span>
+            </div>
+            <div class="project-body">
+              <h3>QR Code Generator</h3>
+              <p>A simple, lightweight tool that turns text or a URL into a scannable QR code — vanilla HTML, CSS, JS.</p>
+              <div class="project-tags">
+                <span>HTML</span><span>CSS</span><span>JavaScript</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/Ayush9942/qr-code-generator-" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-github"></i> Code
+                </a>
+                <a href="https://ayush9942.github.io/qr-code-generator-/" target="_blank" rel="noopener noreferrer">
+                  <i class="fas fa-arrow-up-right-from-square"></i> Live
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ChatSphere -->
+          <article class="project-card">
+            <div class="project-image">
+              <img src="Images/project_chatsphere.jpg" alt="ChatSphere"
+                   onerror="this.style.display='none';">
+              <i class="fas fa-comments project-image-icon"></i>
+              <span class="live-badge">Live</span>
+            </div>
+            <div class="project-body">
+              <h3>ChatSphere</h3>
+              <p>Real-time two-person chat with room codes. Cloudflare Workers + Durable Objects WebSocket backend.</p>
+              <div class="project-tags">
+                <span>JavaScript</span><span>WebSockets</span><span>Cloudflare</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/Ayush9942/Chatsphere" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-github"></i> Code
+                </a>
+                <a href="https://chatsphere.pages.dev/" target="_blank" rel="noopener noreferrer">
+                  <i class="fas fa-arrow-up-right-from-square"></i> Live
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Ayuuu 3D Chemistry -->
+          <article class="project-card">
+            <div class="project-image">
+              <img src="Images/project_ayuuu3d.jpg" alt="Ayuuu 3D Chemistry"
+                   onerror="this.style.display='none';">
+              <i class="fas fa-atom project-image-icon"></i>
+              <span class="live-badge">Live</span>
+            </div>
+            <div class="project-body">
+              <h3>Ayuuu 3D Chemistry</h3>
+              <p>Interactive 3D molecular visualizer — rotate, zoom, and explore compounds in three dimensions.</p>
+              <div class="project-tags">
+                <span>TypeScript</span><span>Vite</span><span>3D</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/Ayush9942/Ayuuu-3d-chemistry-" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-github"></i> Code
+                </a>
+                <a href="https://ayuuu-3d-chemistry.vercel.app/" target="_blank" rel="noopener noreferrer">
+                  <i class="fas fa-arrow-up-right-from-square"></i> Live
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Coming Soon #1 -->
+          <article class="project-card">
+            <div class="project-image">
+              <i class="fas fa-wand-magic-sparkles project-image-icon"></i>
+              <span class="coming-soon-tag">Coming Soon</span>
+            </div>
+            <div class="project-body">
+              <h3>Something new</h3>
+              <p>A fresh idea I'm experimenting with. Stay tuned for the drop.</p>
+              <div class="project-tags"><span>?</span></div>
+              <div class="project-links">
+                <a href="#projects" style="pointer-events:none; opacity:0.5;">
+                  <i class="fas fa-hourglass-half"></i> Soon
+                </a>
+                <a href="#projects" style="pointer-events:none; opacity:0.5;">
+                  <i class="fas fa-hourglass-half"></i> Soon
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Coming Soon #2 -->
+          <article class="project-card">
+            <div class="project-image">
+              <i class="fas fa-microchip project-image-icon"></i>
+              <span class="coming-soon-tag">Coming Soon</span>
+            </div>
+            <div class="project-body">
+              <h3>AI experiment</h3>
+              <p>Playing with AI APIs and small automations. More soon.</p>
+              <div class="project-tags"><span>?</span></div>
+              <div class="project-links">
+                <a href="#projects" style="pointer-events:none; opacity:0.5;">
+                  <i class="fas fa-hourglass-half"></i> Soon
+                </a>
+                <a href="#projects" style="pointer-events:none; opacity:0.5;">
+                  <i class="fas fa-hourglass-half"></i> Soon
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ===== SET 2 (duplicate for seamless loop) ===== -->
+
+          <article class="project-card" aria-hidden="true">
+            <div class="project-image">
+              <img src="Images/project_qr.jpg" alt="" onerror="this.style.display='none';">
+              <i class="fas fa-qrcode project-image-icon"></i>
+              <span class="live-badge">Live</span>
+            </div>
+            <div class="project-body">
+              <h3>QR Code Generator</h3>
+              <p>A simple, lightweight tool that turns text or a URL into a scannable QR code — vanilla HTML, CSS, JS.</p>
+              <div class="project-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+              <div class="project-links">
+                <a href="https://github.com/Ayush9942/qr-code-generator-" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
+                <a href="https://ayush9942.github.io/qr-code-generator-/" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square"></i> Live</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" aria-hidden="true">
+            <div class="project-image">
+              <img src="Images/project_chatsphere.jpg" alt="" onerror="this.style.display='none';">
+              <i class="fas fa-comments project-image-icon"></i>
+              <span class="live-badge">Live</span>
+            </div>
+            <div class="project-body">
+              <h3>ChatSphere</h3>
+              <p>Real-time two-person chat with room codes. Cloudflare Workers + Durable Objects WebSocket backend.</p>
+              <div class="project-tags"><span>JavaScript</span><span>WebSockets</span><span>Cloudflare</span></div>
+              <div class="project-links">
+                <a href="https://github.com/Ayush9942/Chatsphere" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
+                <a href="https://chatsphere.pages.dev/" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square"></i> Live</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" aria-hidden="true">
+            <div class="project-image">
+              <img src="Images/project_ayuuu3d.jpg" alt="" onerror="this.style.display='none';">
+              <i class="fas fa-atom project-image-icon"></i>
+              <span class="live-badge">Live</span>
+            </div>
+            <div class="project-body">
+              <h3>Ayuuu 3D Chemistry</h3>
+              <p>Interactive 3D molecular visualizer — rotate, zoom, and explore compounds in three dimensions.</p>
+              <div class="project-tags"><span>TypeScript</span><span>Vite</span><span>3D</span></div>
+              <div class="project-links">
+                <a href="https://github.com/Ayush9942/Ayuuu-3d-chemistry-" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
+                <a href="https://ayuuu-3d-chemistry.vercel.app/" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square"></i> Live</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" aria-hidden="true">
+            <div class="project-image">
+              <i class="fas fa-wand-magic-sparkles project-image-icon"></i>
+              <span class="coming-soon-tag">Coming Soon</span>
+            </div>
+            <div class="project-body">
+              <h3>Something new</h3>
+              <p>A fresh idea I'm experimenting with. Stay tuned for the drop.</p>
+              <div class="project-tags"><span>?</span></div>
+              <div class="project-links">
+                <a href="#projects" style="pointer-events:none; opacity:0.5;"><i class="fas fa-hourglass-half"></i> Soon</a>
+                <a href="#projects" style="pointer-events:none; opacity:0.5;"><i class="fas fa-hourglass-half"></i> Soon</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" aria-hidden="true">
+            <div class="project-image">
+              <i class="fas fa-microchip project-image-icon"></i>
+              <span class="coming-soon-tag">Coming Soon</span>
+            </div>
+            <div class="project-body">
+              <h3>AI experiment</h3>
+              <p>Playing with AI APIs and small automations. More soon.</p>
+              <div class="project-tags"><span>?</span></div>
+              <div class="project-links">
+                <a href="#projects" style="pointer-events:none; opacity:0.5;"><i class="fas fa-hourglass-half"></i> Soon</a>
+                <a href="#projects" style="pointer-events:none; opacity:0.5;"><i class="fas fa-hourglass-half"></i> Soon</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONNECT ================= -->
+    <section class="connect-section" id="connect">
+      <div class="connect-heading">✨ LET'S CONNECT ✨</div>
+
+      <div class="connect-buttons">
+        <a href="https://github.com/ayush9942" target="_blank" rel="noopener noreferrer" class="btn btn-github" style="--btnDelay: 0.05s">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="https://t.me/ayush9942" target="_blank" rel="noopener noreferrer" class="btn btn-telegram" style="--btnDelay: 0.15s">
+          <i class="fab fa-telegram"></i> Telegram
+        </a>
+        <a href="mailto:ayushranjan1492008@gmail.com" class="btn btn-email" style="--btnDelay: 0.25s">
+          <i class="fas fa-envelope"></i> Email
+        </a>
+      </div>
+
+      <div class="footer-note">
+        <span>always learning · open to collab</span>
+      </div>
+    </section>
+
+    <div class="copyright">
+      <p>&copy; 2026 built with love ❤️ by Ayush</p>
+    </div>
+
+  </div>
+
+  <script>
+    /* reveal on scroll */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal, .section-title, .tech-tag, .btn')
+      .forEach(el => observer.observe(el));
+
+    /* rotating quotes */
+    const quotes = document.querySelectorAll('.quote');
+    let current = 0;
+    if (quotes.length > 1) {
+      setInterval(() => {
+        quotes[current].classList.remove('active');
+        current = (current + 1) % quotes.length;
+        quotes[current].classList.add('active');
+      }, 4200);
+    }
+
+    /* ============================================
+   PROJECT CAROUSEL
+   Auto-scroll + infinite loop + drag + touch
+   ============================================ */
+
+(function () {
+
+  const track = document.querySelector('.carousel-track');
+
+  if (!track) return;
+
+  let isDragging = false;
+  let isPaused = false;
+
+  let startX = 0;
+  let startScrollLeft = 0;
+
+  const speed = 0.65;
+
+  /*
+    Because SET 2 is an exact duplicate of SET 1,
+    half of scrollWidth represents one complete set.
+  */
+  function getLoopWidth() {
+    return track.scrollWidth / 2;
+  }
+
+  /*
+    Keep scroll position inside the duplicated range.
+
+    This works in BOTH directions:
+    right → left
+    left → right
+  */
+  function normalizeScroll() {
+
+    const loopWidth = getLoopWidth();
+
+    if (loopWidth <= 0) return;
+
+    if (track.scrollLeft >= loopWidth) {
+      track.scrollLeft -= loopWidth;
+    }
+
+    if (track.scrollLeft < 0) {
+      track.scrollLeft += loopWidth;
+    }
+  }
+
+
+  /* =========================
+     AUTOMATIC LOOP
+     ========================= */
+
+  function autoScroll() {
+
+    if (!isPaused && !isDragging) {
+
+      track.scrollLeft += speed;
+
+      normalizeScroll();
+    }
+
+    requestAnimationFrame(autoScroll);
+  }
+
+  requestAnimationFrame(autoScroll);
+
+
+  /* =========================
+     MOUSE HOVER PAUSE
+     ========================= */
+
+  track.addEventListener('mouseenter', () => {
+    isPaused = true;
+  });
+
+  track.addEventListener('mouseleave', () => {
+
+    if (!isDragging) {
+      isPaused = false;
+    }
+
+  });
+
+
+  /* =========================
+     MOUSE DRAG
+     ========================= */
+
+  track.addEventListener('mousedown', (e) => {
+
+    isDragging = true;
+    isPaused = true;
+
+    startX = e.pageX;
+    startScrollLeft = track.scrollLeft;
+
+    track.classList.add('dragging');
+
+    e.preventDefault();
+
+  });
+
+
+  document.addEventListener('mousemove', (e) => {
+
+    if (!isDragging) return;
+
+    e.preventDefault();
+
+    const distance = e.pageX - startX;
+
+    track.scrollLeft =
+      startScrollLeft - distance * 1.5;
+
+    normalizeScroll();
+
+  });
+
+
+  document.addEventListener('mouseup', () => {
+
+    if (!isDragging) return;
+
+    isDragging = false;
+
+    track.classList.remove('dragging');
+
+    /*
+      Small delay prevents the carousel from
+      immediately fighting the user's drag.
+    */
+    setTimeout(() => {
+
+      if (!isDragging) {
+        isPaused = false;
+      }
+
+    }, 400);
+
+  });
+
+
+  /* =========================
+     TOUCH SUPPORT
+     ========================= */
+
+  track.addEventListener(
+    'touchstart',
+    () => {
+
+      isPaused = true;
+
+    },
+    { passive: true }
+  );
+
+
+  track.addEventListener(
+    'touchend',
+    () => {
+
+      setTimeout(() => {
+
+        if (!isDragging) {
+          isPaused = false;
+        }
+
+      }, 500);
+
+    },
+    { passive: true }
+  );
+
+
+  /* =========================
+     HORIZONTAL WHEEL / TRACKPAD
+     ========================= */
+
+  track.addEventListener(
+    'wheel',
+    (e) => {
+
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+
+        e.preventDefault();
+
+        track.scrollLeft += e.deltaX;
+
+        normalizeScroll();
+
+      }
+
+    },
+    { passive: false }
+  );
+
+
+  /* =========================
+     PREVENT IMAGE DRAG
+     ========================= */
+
+  track.querySelectorAll('img').forEach((img) => {
+
+    img.addEventListener('dragstart', (e) => {
+      e.preventDefault();
+    });
+
+  });
+
+
+})();
+  </script>
+</body>
+</html>
